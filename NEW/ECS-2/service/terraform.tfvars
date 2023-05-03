@@ -1,0 +1,31 @@
+aws_region                  = "us-east-1"
+tags = {
+  test-tag = "ecr-tag"
+}
+service_name                 ="service"  
+ecs_cluster_id              ="intell"
+service_desired_count      ="3"
+ecs_service_role_name      ="arn:aws:iam::183535165110:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
+target_group_arn          ="ser"
+container_port            ="80"
+container_name           = "httpd:6"
+task_definition            ="httpd"
+#ecs_task_definition_network_mode ="con"
+container_memory            =""
+image_url                  =""
+container_cpu                    =""
+#family                      = "log"
+vpc_id ="vpc-008cad8c938e96d79"
+name                        ="innovations"
+container_Port               = "80"
+host_Port                    = "80"
+execution_role_arn           ="arn:aws:iam::183535165110:role/ecsTaskExecutionRole"
+#requires_compatibilities   =["EC2","FARGATE"]
+      container_image = "183535165110.dkr.ecr.us-east-1.amazonaws.com/syoftdev:ubuntu"
+      family       =  "httpd"
+      image  = "183535165110.dkr.ecr.us-east-1.amazonaws.com/syoftdev:ubuntu"
+      cpu       = 10
+      memory    = 512
+          containerPort = 80
+          hostPort      = 80
+

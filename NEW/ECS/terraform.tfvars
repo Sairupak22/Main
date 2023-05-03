@@ -1,0 +1,12 @@
+region = "us-east-1"
+description             = "dev-key"
+deletion_window_in_days = 7
+name = "syoftdev"
+logging    = "OVERRIDE"
+cloud_watch_encryption_enabled = true
+ecs_service_role_name = "arn:aws:iam::aws:policy/aws-service-role/AmazonECSServiceRolePolicy" 
+cidr_block       = "10.0.0.0/16"
+enable_dns_hostnames = true
+name_prefix   = "terraform-lc"
+image_id      = "ami-02396cdd13e9a1257"
+instance_type = "t2.micro"

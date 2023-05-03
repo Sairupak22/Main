@@ -1,0 +1,12 @@
+variable "region" {}
+variable "description" {}
+variable "deletion_window_in_days" {}
+variable "name" {}
+variable "logging" {}
+variable "cloud_watch_encryption_enabled" {}
+variable "ecs_service_role_name" {} 
+variable "cidr_block" {}
+variable "enable_dns_hostnames" {}
+variable "name_prefix" {}
+variable "image_id" {}
+variable "instance_type" {}
