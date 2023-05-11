@@ -1,0 +1,45 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      HOST: ${{ secrets.SSH_HOST }}
+      USER: ${{ secrets.SSH_USERNAME }}
+      KEY: ${{ secrets.SSH_PASSWORD }}
+      PORT: ${{ secrets.SSH_PORT }}
+      NAME: deploy-server
+    steps:
+      - name: create key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ env.KEY }}" > ~/.ssh/${{ env.NAME }}.key
+          sudo chmod 600 ~/.ssh/${{ env.NAME }}.key
+        shell: bash
+      - name: Scan the public ssh host keys
+        run: ssh-keyscan -H ${{ env.HOST }} >> ~/.ssh/known_hosts
+        shell: bash
+      - name: Create SSH config
+        run: |
+          cat >>~/.ssh/config <<END
+          Host ${{ env.NAME }}
+            HostName ${{ env.HOST }}
+            Port ${{ env.PORT }}
+            User ${{ env.USER }}
+            IdentityFile ~/.ssh/${{ env.NAME }}.key
+          END
+        shell: bash
+      - name: run commands
+        run:  |
+          ssh ${{env.NAME}} << EOF
+            cd ~/worke-consultation/worke-consultation-service/
+            git pull -f origin master
+            conda deactivate
+            conda activate consultation
+            make run-dev
+          EOF
+        shell: bash
